@@ -8,7 +8,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class AES {
 	 		
-	private static String IV = "DEFAULTINITVECTR"; // 16 byte
+	private static final String IV = "DEFAULTINITVECTR"; // 16 byte
 	
 	public static byte[] encrypt(byte[] plainTextBytes, String password) throws 
 		NoSuchAlgorithmException, 
@@ -23,7 +23,7 @@ public class AES {
 	    Cipher cipher = Cipher.getInstance("AES/OFB/Nopadding");
 	    MessageDigest sha = MessageDigest.getInstance("SHA-1");
 	    byte[] key = sha.digest(password.getBytes("UTF-8"));
-	    key = Arrays.copyOf(key, 16); // use only first 128 bit
+	    key = Arrays.copyOf(key, 16);
 
 	    SecretKeySpec spec = new SecretKeySpec(key, "AES");
 	    cipher.init(Cipher.ENCRYPT_MODE, spec, new IvParameterSpec(IV.getBytes()));

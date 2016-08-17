@@ -44,20 +44,18 @@ public class Client {
 	 * The DH values are obtained randomly from a {@code SecureRandom} object.
 	 * @throws IOException
 	 */
-	public static void main() throws IOException{
+	public static void main(String[] args) throws IOException{
 		
 		String message = null;
 		
 		// Client's random
 		SecureRandom sRand = new SecureRandom();
 		Long xa = Math.abs(sRand.nextLong());
-		System.out.println(xa);
 
 		// Send random to server and wait for server to send its
 		Socket clientSocket = new Socket("localhost", dhport);
-		System.out.println("Connected");
+		System.out.println("Connected to server");
 		DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-		System.out.println("Sent data");
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 		
 		outToServer.writeUTF(xa.toString() + "\n");

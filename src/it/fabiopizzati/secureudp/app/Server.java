@@ -57,7 +57,7 @@ public class Server {
 	 * The DH values are obtained randomly from a {@code SecureRandom} object.
 	 * @throws IOException
 	 */
-	public static void main() throws IOException{
+	public static void main(String[] args) throws IOException{
 		
 		// Diffie-Hellman key exchange (needed public/private key pair
 		// to implement more secure key exchange schemes)
@@ -65,8 +65,6 @@ public class Server {
 		// Server's random
 		SecureRandom sRand = new SecureRandom();
 		Long xb = Math.abs(sRand.nextLong());
-
-		System.out.println(xb);
 		
 		dhSocket = new ServerSocket(dhport);
 		

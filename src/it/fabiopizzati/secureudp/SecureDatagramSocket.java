@@ -74,7 +74,6 @@ public class SecureDatagramSocket extends DatagramSocket {
 			e.printStackTrace();
 		}
 		
-		System.out.println(hmac);
 		String message = hmac + new String(p.getData());
 		
 		try {
@@ -102,7 +101,6 @@ public class SecureDatagramSocket extends DatagramSocket {
 		super.receive(p);
 		
 		// The size changes if the message is decrypted
-		System.out.println(p.getLength());
 		byte[] decryptedMessage = null;
 		try {
 			decryptedMessage = AES.decrypt(p.getData(), this.password);
@@ -119,7 +117,6 @@ public class SecureDatagramSocket extends DatagramSocket {
 				System.out.println("Message corruption detected!");
 				System.out.println(HMAC.calculate(msg, this.password) + " <> " + new String(hmac));
 			}
-			System.out.println(p.getLength());
 			p.setData(msg);
 			
 		} catch (InvalidKeyException | SignatureException | NoSuchAlgorithmException e) {

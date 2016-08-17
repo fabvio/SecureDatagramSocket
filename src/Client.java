@@ -8,6 +8,8 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.security.SecureRandom;
 
+import it.fabiopizzati.secureudp.SecureDatagramSocket;
+
 public class Client {
 	
 	private static final int dhport = 8777;
@@ -24,7 +26,7 @@ public class Client {
 		SecureRandom sRand = new SecureRandom();
 		Long xa = Math.abs(sRand.nextLong());
 		System.out.println(xa);
-		
+
 		// Send random to server and wait for server to send its
 		Socket clientSocket = new Socket("localhost", dhport);
 		System.out.println("Connected");

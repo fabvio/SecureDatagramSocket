@@ -7,14 +7,15 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.security.SecureRandom;
-import java.util.Arrays;
+
+import it.fabiopizzati.secureudp.SecureDatagramSocket;
 
 public class Server {
 	
 	private static final int dhport = 8777;
 	private static final int dataport = 12398;
 	private static ServerSocket dhSocket;
-
+	private static final int bufsize = 512;
 	private static final int g = 2;
 	private static final Long p = new Long("6974133661755618893");
 	
@@ -51,17 +52,17 @@ public class Server {
             ByteBuffer pwbuffer = ByteBuffer.allocate(Long.BYTES);
             pwbuffer.putLong(password);
 			
-			byte[] buf = new byte[256];
-			DatagramPacket p = new DatagramPacket(buf, 256);
+			byte[] buf = new byte[bufsize];
 			SecureDatagramSocket socket = new SecureDatagramSocket(pwbuffer.array(), dataport);
 			System.out.println("Datagram server started on port " + dataport);
 			
 			boolean end = false;
 			
 			while(!end){
+				
+				DatagramPacket p = new DatagramPacket(buf, bufsize);
 				socket.receive(p);
 
-				p.setData(Arrays.copyOfRange(p.getData(), 0, p.getLength()));
 				String received = new String(p.getData());
 				System.out.println("Received:" + received);
 				

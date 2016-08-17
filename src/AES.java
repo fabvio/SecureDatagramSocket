@@ -10,7 +10,7 @@ public class AES {
 	 		
 	private static final String IV = "DEFAULTINITVECTR"; // 16 byte
 	
-	public static byte[] encrypt(byte[] plainTextBytes, String password) throws 
+	public static byte[] encrypt(byte[] plainTextBytes, byte[] password) throws 
 		NoSuchAlgorithmException, 
 		NoSuchPaddingException, 
 		UnsupportedEncodingException, 
@@ -22,7 +22,7 @@ public class AES {
 
 	    Cipher cipher = Cipher.getInstance("AES/OFB/Nopadding");
 	    MessageDigest sha = MessageDigest.getInstance("SHA-1");
-	    byte[] key = sha.digest(password.getBytes("UTF-8"));
+	    byte[] key = sha.digest(password);
 	    key = Arrays.copyOf(key, 16);
 
 	    SecretKeySpec spec = new SecretKeySpec(key, "AES");
@@ -30,7 +30,7 @@ public class AES {
 	    return cipher.doFinal(plainTextBytes);
 	}
 	 
-	public static byte[] decrypt(byte[] encryptedTextBytes, String password) throws 
+	public static byte[] decrypt(byte[] encryptedTextBytes, byte[] password) throws 
 		NoSuchAlgorithmException, 
 		NoSuchPaddingException, 
 		UnsupportedEncodingException, 
@@ -41,7 +41,7 @@ public class AES {
 	{
 	    Cipher cipher = Cipher.getInstance("AES/OFB/Nopadding");
 	    MessageDigest sha = MessageDigest.getInstance("SHA-1");
-	    byte[] key = sha.digest(password.getBytes("UTF-8"));
+	    byte[] key = sha.digest(password);
 	    key = Arrays.copyOf(key, 16); 
 
 	    SecretKeySpec spec = new SecretKeySpec(key, "AES");

@@ -22,14 +22,14 @@ import javax.crypto.NoSuchPaddingException;
 
 public class SecureDatagramSocket extends DatagramSocket {
 
-	private String password;
+	private byte[] password;
 	
-	public SecureDatagramSocket(String _password) throws SocketException {
+	public SecureDatagramSocket(byte[] _password) throws SocketException {
 		super();
 		this.password = _password;
 	}
 	
-	public SecureDatagramSocket(String _password, int PORT) throws SocketException{
+	public SecureDatagramSocket(byte[] _password, int PORT) throws SocketException{
 		super(PORT);
 		this.password = _password;
 	}
